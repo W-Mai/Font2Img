@@ -5,7 +5,9 @@ project('Font2Img', 'cpp',
 
 freetype2_dep = dependency('freetype2')
 
-exe = executable('Font2Img', 'font2img.cpp',
+cpp_source = files('src/Freetype.cpp', 'src/Freetype.h')
+
+exe = executable('Font2Img', cpp_source + 'font2img.cpp',
                  install : true,
                  dependencies : [freetype2_dep]
 )
