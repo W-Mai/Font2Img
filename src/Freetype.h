@@ -32,6 +32,8 @@ class Face {
 
 public:
     Face(Freetype *ft, const char *path, uint32_t index = 0);
+
+    ~Face();
 };
 
 class Glyph {

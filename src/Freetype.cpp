@@ -62,3 +62,8 @@ Face::Face(Freetype *ft, const char *path, uint32_t index) {
         throw std::runtime_error(ss.str());
     }
 }
+Face::~Face() {
+    FT_Done_Face(impl->face);
+
+    delete impl;
+}
