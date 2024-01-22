@@ -4,6 +4,9 @@
 
 #ifndef FONT2IMG_FREETYPE_H
 #define FONT2IMG_FREETYPE_H
+
+#include <memory>
+
 class Freetype;
 
 class Face;
@@ -18,6 +21,9 @@ class Freetype {
 public:
     Freetype();
     ~Freetype();
+
+    pImpl *getImpl() const;
+    std::shared_ptr<Face> newFace(const char *path, uint32_t index = 0);
 };
 
 class Face {
@@ -25,6 +31,7 @@ class Face {
     pImpl *impl;
 
 public:
+    Face(Freetype *ft, const char *path, uint32_t index = 0);
 };
 
 class Glyph {

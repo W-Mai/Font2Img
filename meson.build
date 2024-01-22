@@ -1,7 +1,10 @@
 project('Font2Img', 'cpp',
         version : '0.1',
-        default_options : ['warning_level=3',
-                           'cpp_std=c++17'])
+        default_options : [
+            'warning_level=3',
+            'cpp_std=c++17',
+            '-DFT2_BUILD_LIBRARY=1'
+        ])
 
 freetype2_dep = dependency('freetype2')
 
