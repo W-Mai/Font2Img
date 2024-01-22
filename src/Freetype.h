@@ -13,6 +13,12 @@ class Face;
 
 class Glyph;
 
+enum FreetypeFaceStyle : uint8_t {
+    Regular    = 0,
+    Bold       = 1 << 0,
+    Italic     = 1 << 2,
+    BoldItalic = Bold | Italic
+};
 
 class Freetype {
     struct pImpl;
@@ -32,6 +38,9 @@ class Face {
 
 public:
     Face(Freetype *ft, const char *path, uint32_t index = 0);
+
+    void setStyle(FreetypeFaceStyle style);
+    void setSize(uint32_t size);
 
     ~Face();
 };

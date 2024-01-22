@@ -19,6 +19,7 @@ struct Face::pImpl {
     FT_Face face;
 
     uint32_t index;
+    FreetypeFaceStyle style;
 };
 
 /***************************
@@ -67,3 +68,12 @@ Face::~Face() {
 
     delete impl;
 }
+void Face::setStyle(FreetypeFaceStyle style) {
+    if (style & FreetypeFaceStyle::Italic) {
+        FT_Matrix matrix = {1 << 16, 0, 0, 1 << 16};
+        FT_Set_Transform(impl->face, &matrix, nullptr);
+    }
+
+    impl->style = style;
+}
+void Face::setSize(uint32_t size) { FT_Set_Pixel_Sizes(impl->face, 0, size); }
