@@ -20,6 +20,12 @@ enum FreetypeFaceStyle : uint8_t {
     BoldItalic = Bold | Italic
 };
 
+enum FreetypeGlyphRenderMode : uint8_t {
+    Bitmap = 0,
+    Outline,
+    SVG,
+};
+
 class Freetype {
     struct pImpl;
     pImpl *impl;
@@ -42,6 +48,9 @@ public:
     void setStyle(FreetypeFaceStyle style);
     void setSize(uint32_t size);
 
+    pImpl *getImpl() const;
+    std::shared_ptr<Glyph> getGlyph(uint32_t unicode, FreetypeGlyphRenderMode mode);
+
     ~Face();
 };
 
@@ -50,6 +59,17 @@ class Glyph {
     pImpl *impl;
 
 public:
+    Glyph(Face *face, uint32_t unicode, FreetypeGlyphRenderMode mode);
+
+    uint32_t getWidth() const;
+    uint32_t getHeight() const;
+    uint32_t getAdvance() const;
+    uint32_t getBearingX() const;
+    uint32_t getBearingY() const;
+
+    std::shared_ptr<uint8_t> render() const;
+
+    ~Glyph();
 };
 
 #endif//FONT2IMG_FREETYPE_H
