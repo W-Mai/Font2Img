@@ -47,6 +47,7 @@ public:
 
     void setStyle(FreetypeFaceStyle style);
     void setSize(uint32_t size);
+    void addMatrix(double xx, double xy, double yx, double yy);
 
     pImpl *getImpl() const;
     std::shared_ptr<Glyph> getGlyph(uint32_t unicode, FreetypeGlyphRenderMode mode);
@@ -61,13 +62,15 @@ class Glyph {
 public:
     Glyph(Face *face, uint32_t unicode, FreetypeGlyphRenderMode mode);
 
+    uint32_t getPitch() const;
     uint32_t getWidth() const;
     uint32_t getHeight() const;
+    uint32_t getRows() const;
     uint32_t getAdvance() const;
     uint32_t getBearingX() const;
     uint32_t getBearingY() const;
 
-    std::shared_ptr<uint8_t> render() const;
+    std::shared_ptr<uint8_t[]> render() const;
 
     ~Glyph();
 };
